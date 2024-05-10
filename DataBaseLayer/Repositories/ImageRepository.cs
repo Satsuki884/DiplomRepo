@@ -5,7 +5,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class ImageRepository
+    public class ImageRepository
     {
 
         public Image Retrieve(int imageId)

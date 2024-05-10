@@ -5,9 +5,8 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class ExerciseRepository
+    public class ExerciseRepository
     {
-
         public List<Exercise> Retrieve()
         {
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))

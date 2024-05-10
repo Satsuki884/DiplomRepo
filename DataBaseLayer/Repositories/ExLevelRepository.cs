@@ -1,6 +1,6 @@
 ﻿namespace DataBaseLayer.Repositories
 {
-    internal class ExLevelRepository
+    public class ExLevelRepository
     {
 
         

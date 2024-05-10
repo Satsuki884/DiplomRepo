@@ -21,8 +21,6 @@
         internal static string PathToSave { get; set; }
         private static string _defaultConnectionString = "root@127.0.0.1:3306";
 
-
-
         public static void SetConnectionString(string _ConnectionString)
         {
             ConnectionString = _ConnectionString;

@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseLayer", "DataBaseLayer\DataBaseLayer.csproj", "{28D5F066-1926-4ED7-B168-B463E7CD92D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseLayer", "DataBaseLayer\DataBaseLayer.csproj", "{28D5F066-1926-4ED7-B168-B463E7CD92D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hell", "Hell\Hell.csproj", "{30FD7A15-9DA6-420A-BD3A-ED1B9475E458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hell", "Hell\Hell.csproj", "{30FD7A15-9DA6-420A-BD3A-ED1B9475E458}"
+	ProjectSection(ProjectDependencies) = postProject
+		{28D5F066-1926-4ED7-B168-B463E7CD92D5} = {28D5F066-1926-4ED7-B168-B463E7CD92D5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

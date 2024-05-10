@@ -5,7 +5,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class LevelRepository
+    public class LevelRepository
     {
         public List<Level> Retrieve()
         {

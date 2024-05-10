@@ -5,7 +5,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class StoneLevelRepository
+    public class StoneLevelRepository
     {
 
         public StoneLevel Retrieve(int LevelId)

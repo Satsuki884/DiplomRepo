@@ -1,6 +1,6 @@
 ﻿namespace DataBaseLayer.Models
 {
-    internal class Models
+    public class Models
     {
         public class Image
         {
