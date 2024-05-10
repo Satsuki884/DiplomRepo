@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataBaseLayer.DBSettings
+﻿namespace DataBaseLayer.DBSettings
 {
     internal static class DataBaseManager
     {
@@ -25,7 +19,6 @@ namespace DataBaseLayer.DBSettings
             }
         }
         internal static string PathToSave { get; set; }
-        internal static string SavePathInfo;
         private static string _defaultConnectionString = "root@127.0.0.1:3306";
 
 

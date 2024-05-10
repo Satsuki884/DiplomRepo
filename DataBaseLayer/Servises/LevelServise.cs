@@ -1,10 +1,4 @@
 ﻿using DataBaseLayer.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Servises
 {
@@ -18,7 +12,31 @@ namespace DataBaseLayer.Servises
             _levelRepository = new LevelRepository();
         }
         
-        public bool IsCompleated(string name)
+        public bool IsLevelComplitedSuccessible(string name, int grade)
+        {
+            if(IsComplited(name, grade))
+            {
+               return IsAvailable(name);
+            }
+
+            return false;
+        }
+
+        public bool IsComplited(string name, int grade)
+        {
+            var level = _levelRepository.Retrieve(name);
+            if (grade > 0 && level != null)
+            {
+                level.IsCompleted = true;
+                level.Grade = grade;
+
+                return _levelRepository.Update(level);
+            }
+
+            return false;
+        }
+
+        public bool IsComplited(string name)
         {
             var level = _levelRepository.Retrieve(name);
             if(level.Grade > 0)
@@ -30,38 +48,39 @@ namespace DataBaseLayer.Servises
             return false;
         }
 
-        public bool IsAvailable(string name)
+        public bool IsAvailable(string currentLevelName)
         {
-            var level = _levelRepository.Retrieve(name);
+            var level = _levelRepository.Retrieve(currentLevelName);
             
-
-            string newString;
-            string[] parts = name.Split(' ');
-            int.TryParse(parts[1], out int number);
-            newString = $"Level {number}";
-            var next_level = _levelRepository.Retrieve(newString);
-
+            if(!level.IsCompleted)
+            {
+                return false;
+            }
             var levels = _levelRepository.Retrieve();
-            int sumGrades = 0;
-            foreach(var Qlevel  in levels) 
-            {
-                sumGrades += Qlevel.Grade;
-            }
 
-            if (level.IsCompleted && !level.IsBoss)
-            {
-                level.IsAvailable = true;
-                _levelRepository.Update(next_level);
-                return true;
-            }else if(level.IsCompleted && level.IsBoss && sumGrades == Rules.bossLevelAcssesRule)
-            {
-                level.IsAvailable = true;
-                _levelRepository.Update(next_level);
-                return true;
-            }
+            var currentLevelNumber = int.Parse(currentLevelName.Split(' ')[1]);
+            
+            var nextLevelNumber = currentLevelNumber++;
+            var nextLevelName = $"Level {nextLevelNumber}";
+            
+            var nextLevel = _levelRepository.Retrieve(nextLevelName);
 
-            return false;
+            int sumGrades = levels.Where(x=>x.Grade != 0).Sum(x=>x.Grade);
+
+            if (!level.IsBoss)
+            {
+                nextLevel.IsAvailable = true;
+                return _levelRepository.Update(nextLevel);
+            }
+            else
+            {
+                if (Rules.bossLevelAcssesRule.TryGetValue(currentLevelNumber, out int pointsNeed) && sumGrades == pointsNeed)
+                {
+                    nextLevel.IsAvailable = true;
+                    return _levelRepository.Update(nextLevel);
+                }
+                return false;
+            }
         }
-
     }
 }
