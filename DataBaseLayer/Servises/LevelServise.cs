@@ -4,11 +4,9 @@ namespace DataBaseLayer.Servises
 {
     public class LevelServise
     {
-        private readonly StoneRepository _stoneRepository;
         private readonly LevelRepository _levelRepository;
         public LevelServise()
         {
-            _stoneRepository = new StoneRepository();
             _levelRepository = new LevelRepository();
         }
         
