@@ -8,13 +8,34 @@
             public string ImagePath { get; set; }
         }
 
+        public class Answer
+        {
+            public int AnswerId { get; set; }
+            public string value { get; set; }
+        }
+
+        public class ExImage
+        {
+            public int ExImageId {  get; set; }
+            public int ImageId { get; set; }
+            public int ExerciseId { get; set; }
+        }
+
+        public class ExAnswer
+        {
+            public int AnswerId { get; set; }
+            public int ExAnswerId { get; set;}
+            public int ExerciseId { get; set;}
+        }
+
         public class Exercise
         {
             public int ExerciseId { get; set; }
             public int ImageId { get; set; }
             public string Text { get; set; }
             public int Point { get; set; }
-            public string Answer { get; set; }
+            //public string Answer { get; set; }
+            public int LevelId { get; set; }
             public Image Image { get; set; }
         }
 
@@ -29,6 +50,7 @@
             public bool IsCompleted { get; set; }
             public bool IsAvailable { get; set; }
             public Image Image { get; set; }
+            public int StoneId { get; set; }
         }
 
         public enum StoneValue
@@ -71,21 +93,5 @@
             public Exercise Exercise { get; set; }
         }
 
-        public class StoneLevel
-        {
-            public int StoneLevelId { get; set; }
-            public int LevelId { get; set; }
-            public int StoneId { get; set; }
-            public Level Level { get; set; }
-            public Stone Stone { get; set; }
-        }
-
-        public class BossLevel
-        {
-            public int BossLevelId { get; set; }
-            public int MinGrade { get; set; }
-            public int LevelId { get; set; }
-            public Level Level { get; set; }
-        }
     }
 }

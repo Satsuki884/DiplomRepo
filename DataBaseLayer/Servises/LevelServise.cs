@@ -9,6 +9,11 @@ namespace DataBaseLayer.Servises
         {
             _levelRepository = new LevelRepository();
         }
+
+       /* bool isLevelAvailable(int level)
+        {
+
+        }*/
         
         public bool IsLevelComplitedSuccessible(string name, int grade)
         {

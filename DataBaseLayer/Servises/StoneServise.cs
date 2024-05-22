@@ -12,27 +12,27 @@ namespace DataBaseLayer.Servises
     {
         private readonly LevelRepository _levelRepository;
         private readonly StoneRepository _stoneRepository;
-        private readonly StoneLevelRepository _stoneLevelRepository;
+        //private readonly StoneLevelRepository _stoneLevelRepository;
 
         public StoneServise()
         {
             _levelRepository = new LevelRepository();
             _stoneRepository = new StoneRepository();
-            _stoneLevelRepository = new StoneLevelRepository();
+            //_stoneLevelRepository = new StoneLevelRepository();
         }
 
         public bool SetStoneToLevel(string name)
         {
             var level = _levelRepository.Retrieve(name);
-            var stoneLevel = _stoneLevelRepository.Retrieve(int.Parse(name.Split(' ')[1]));
+            //var stoneLevel = _stoneLevelRepository.Retrieve(int.Parse(name.Split(' ')[1]));
 
             var result = Math.Round((double)level.Grade * 4 / level.MaxRate);
 
             var stone = _stoneRepository.Retrieve((StoneValue)result);
 
-            stoneLevel.StoneId = stone.StoneId;
+            level.StoneId = stone.StoneId;
 
-            return _stoneLevelRepository.Update(stoneLevel);
+            return _levelRepository.Update(level);
         }
     }
 }

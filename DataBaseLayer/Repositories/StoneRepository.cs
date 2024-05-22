@@ -5,7 +5,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class StoneRepository
+    public class StoneRepository
     {
         public List<Stone> Retrieve()
         {
@@ -21,7 +21,7 @@ namespace DataBaseLayer.Repositories
         {
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
-                connection.Open();
+                connection.Open(); 
                 var stone = connection.Query<Stone>("SELECT * FROM stone WHERE @StoneId", StoneId).FirstOrDefault();
                 return stone;
             }

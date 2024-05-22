@@ -3,6 +3,10 @@
     internal static class DataBaseManager
     {
         private static string _connectionString;
+        private static string _defaultConnectionString = "Data Source=127.0.0.1,3306;" +
+                                                        "Database=diplom;" +
+                                                        "User id=root;" +
+                                                        "Password=1111;";
         internal static string ConnectionString
         {
             get
@@ -19,7 +23,7 @@
             }
         }
         internal static string PathToSave { get; set; }
-        private static string _defaultConnectionString = "root@127.0.0.1:3306";
+     
 
         public static void SetConnectionString(string _ConnectionString)
         {

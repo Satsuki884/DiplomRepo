@@ -10,8 +10,18 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class UserRepository
+    public class UserRepository
     {
+
+        public List<User> Retrieve()
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var users = connection.Query<User>("SELECT * FROM user").AsList();
+                return users;
+            }
+        }
 
         public User Retrieve(int UserId)
         {

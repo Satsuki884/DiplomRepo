@@ -26,8 +26,8 @@ namespace DataBaseLayer.Repositories
                 return level;
             }
         }
-
-        public Level Retrieve(string name)
+          
+        public Level Retrieve(string name) 
         {
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
