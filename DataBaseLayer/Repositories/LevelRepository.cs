@@ -23,7 +23,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var level = connection.Query<Level>("SELECT * FROM level WHERE LevelId = @LevelId", LevelId).FirstOrDefault();
+                var level = connection.Query<Level>("SELECT * FROM level WHERE LevelId = @LevelId",new { LevelId }).FirstOrDefault();
                 return level;
             }
         }

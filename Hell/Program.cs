@@ -19,8 +19,11 @@ internal class Program
         //}
 
         var servis = new LevelServise();
+        var stoneServis = new StoneServise();
 
         Console.WriteLine(servis.IsLevelComplitedSuccessible(value1.Name, 8));
+        Console.WriteLine(stoneServis.SetStoneToLevel(value1.Name));
+        Console.WriteLine("StoneId " + value1.StoneId + "\n\n\n");
 
         var value2 = rep1.Retrieve("Level 2");
         /*foreach(var item in value1)

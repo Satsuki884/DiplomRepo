@@ -22,7 +22,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open(); 
-                var stone = connection.Query<Stone>("SELECT * FROM stone WHERE StoneId = @StoneId", StoneId).FirstOrDefault();
+                var stone = connection.Query<Stone>("SELECT * FROM stone WHERE StoneId = @StoneId", new{ StoneId }).FirstOrDefault();
                 return stone;
             }
         }
@@ -32,7 +32,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var stone = connection.Query<Stone>("SELECT * FROM Stone WHERE stoneValue = @stoneValue", stoneValue).FirstOrDefault();
+                var stone = connection.Query<Stone>("SELECT * FROM Stone WHERE stoneValue = @stoneValue", new { stoneValue }).FirstOrDefault();
                 return stone;
             }
         }

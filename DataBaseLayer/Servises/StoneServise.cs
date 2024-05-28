@@ -8,7 +8,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Servises
 {
-    internal class StoneServise
+    public class StoneServise
     {
         private readonly LevelRepository _levelRepository;
         private readonly StoneRepository _stoneRepository;

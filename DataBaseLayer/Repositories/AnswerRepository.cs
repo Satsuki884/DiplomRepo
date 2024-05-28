@@ -28,7 +28,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE value = @value", value).FirstOrDefault();
+                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE value = @value", new { value }).FirstOrDefault();
                 return answer;
             }
         }
@@ -38,7 +38,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE AnswerId = @AnswerId", AnswerId).FirstOrDefault();
+                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE AnswerId = @AnswerId", new { AnswerId }).FirstOrDefault();
                 return answer;
             }
         }

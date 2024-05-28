@@ -24,7 +24,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var image = connection.Query<Image>("SELECT * FROM image WHERE imageId = @imageId", imageId).FirstOrDefault();
+                var image = connection.Query<Image>("SELECT * FROM image WHERE imageId = @imageId", new { imageId }).FirstOrDefault();
                 return image;
             }
         }

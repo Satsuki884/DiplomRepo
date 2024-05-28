@@ -18,7 +18,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var exImages = connection.Query<ExImage>("SELECT * FROM eximages WHERE ExerciseId = @ExerciseId", ExerciseId).AsList();
+                var exImages = connection.Query<ExImage>("SELECT * FROM eximages WHERE ExerciseId = @ExerciseId", new { ExerciseId }).AsList();
                 return exImages;
 
             }
