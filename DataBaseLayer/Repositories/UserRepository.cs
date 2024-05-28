@@ -28,7 +28,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<User>("SELECT * FROM user WHERE @UserId", UserId).FirstOrDefault();
+                var user = connection.Query<User>("SELECT * FROM user WHERE UserId = @UserId", UserId).FirstOrDefault();
                 return user;
             }
         }
@@ -38,7 +38,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<User>("SELECT * FROM user WHERE @name", name).FirstOrDefault();
+                var user = connection.Query<User>("SELECT * FROM user WHERE name = @name", name).FirstOrDefault();
                 return user;
             }
         }

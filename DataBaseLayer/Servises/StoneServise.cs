@@ -26,7 +26,7 @@ namespace DataBaseLayer.Servises
             var level = _levelRepository.Retrieve(name);
             //var stoneLevel = _stoneLevelRepository.Retrieve(int.Parse(name.Split(' ')[1]));
 
-            var result = Math.Round((double)level.Grade * 4 / level.MaxRate);
+            var result = Math.Round((double)level.Grade * 4 / level.Max_rate);
 
             var stone = _stoneRepository.Retrieve((StoneValue)result);
 

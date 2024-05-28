@@ -41,10 +41,11 @@
 
         public class Level
         {
+
             public int LevelId { get; set; }
             public int ImageId { get; set; }
             public string Name { get; set; }
-            public int MaxRate { get; set; }
+            public int Max_rate { get; set; }
             public int Grade { get; set; }
             public bool IsBoss { get; set; }
             public bool IsCompleted { get; set; }

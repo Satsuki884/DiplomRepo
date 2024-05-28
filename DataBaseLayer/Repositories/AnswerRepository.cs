@@ -28,9 +28,21 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE @value", value).FirstOrDefault();
+                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE value = @value", value).FirstOrDefault();
                 return answer;
             }
         }
+
+        public Answer Retrieve(int AnswerId)
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var answer = connection.Query<Answer>("SELECT * FROM answer WHERE AnswerId = @AnswerId", AnswerId).FirstOrDefault();
+                return answer;
+            }
+        }
+
+
     }
 }

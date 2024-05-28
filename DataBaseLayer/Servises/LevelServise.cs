@@ -45,7 +45,7 @@ namespace DataBaseLayer.Servises
             if(level.Grade > 0)
             { 
                 level.IsCompleted = true;
-                _levelRepository.Update(level);
+                //_levelRepository.Update(level);
                 return true;
             }
             return false;
@@ -63,7 +63,8 @@ namespace DataBaseLayer.Servises
 
             var currentLevelNumber = int.Parse(currentLevelName.Split(' ')[1]);
             
-            var nextLevelNumber = currentLevelNumber++;
+            var nextLevelNumber = currentLevelNumber+1;
+            Console.WriteLine("nextLevelNumber: " + nextLevelNumber);
             var nextLevelName = $"Level {nextLevelNumber}";
             
             var nextLevel = _levelRepository.Retrieve(nextLevelName);
@@ -72,6 +73,8 @@ namespace DataBaseLayer.Servises
 
             if (!level.IsBoss)
             {
+                Console.WriteLine("Leven name: " + level.Name);
+                Console.WriteLine("Level next name: " + nextLevel.Name);
                 nextLevel.IsAvailable = true;
                 return _levelRepository.Update(nextLevel);
             }

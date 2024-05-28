@@ -22,9 +22,19 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var exercise = connection.Query<Exercise>("SELECT * FROM exercise WHERE @ExerciseId", ExerciseId).FirstOrDefault();
+                var exercise = connection.Query<Exercise>("SELECT * FROM exercise WHERE ExerciseId = @ExerciseId", ExerciseId).FirstOrDefault();
                 return exercise;
             }
-        }     
+        }
+
+        public List<Exercise> RetrieveByLevelId(int LevelId)
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var stones = connection.Query<Exercise>("SELECT * FROM exercise WHERE LevelId = @LevelId", LevelId).AsList();
+                return stones;
+            }
+        }
     }
 }

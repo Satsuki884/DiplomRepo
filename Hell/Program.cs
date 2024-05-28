@@ -1,20 +1,40 @@
 ﻿using DataBaseLayer.Repositories;
+using DataBaseLayer.Servises;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-       /* var rep = new StoneRepository();
-        var value = rep.Retrieve();
-        value.ForEach(x => Console.WriteLine(x.Value));*/
-
         var rep1 = new LevelRepository();
-        var value1 = rep1.Retrieve();
-        value1.ForEach(x => Console.WriteLine(x.Name));
-/*
-        var rep2 = new UserRepository();
-        var value2 = rep2.Retrieve();
-        value2.ForEach(x => Console.WriteLine(x.Name));*/
+        var value1 = rep1.Retrieve("Level 1");
+        /*foreach(var item in value1)
+        {
+            Console.WriteLine("Name "+value1.Name);
+            Console.WriteLine("Grade " + value1.Grade);
+            Console.WriteLine("Max_rate " + value1.Max_rate);
+            Console.WriteLine("IsAvailable " + value1.IsAvailable);
+            Console.WriteLine("IsBoss " + value1.IsBoss);
+            Console.WriteLine("IsCompleted " + value1.IsCompleted);
+            Console.WriteLine("StoneId " + value1.StoneId);*/
+        //}
+
+        var servis = new LevelServise();
+
+        Console.WriteLine(servis.IsLevelComplitedSuccessible(value1.Name, 8));
+
+        var value2 = rep1.Retrieve("Level 2");
+        /*foreach(var item in value1)
+        {*/
+        Console.WriteLine(value2.Name);
+        Console.WriteLine(value2.LevelId);
+        Console.WriteLine(value2.Grade);
+        Console.WriteLine(value2.Max_rate);
+        Console.WriteLine(value2.IsAvailable);
+        Console.WriteLine(value2.IsBoss);
+        Console.WriteLine(value2.IsCompleted);
+        Console.WriteLine(value2.StoneId);
+        //}
+
 
 
     }
