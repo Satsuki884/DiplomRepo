@@ -42,5 +42,42 @@ namespace DataBaseLayer.Repositories
                 return user;
             }
         }
+
+        public bool Update(User user)
+        {
+            //Console.WriteLine("Level name" + level.Name + ", rate = " + level.Max_rate + ", id = " + level.LevelId);
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                bool result = false;
+                var rowsAffected = connection.Execute(@"UPDATE user
+                                                    SET UserId = @UserId,
+                                                imageId = @ImageId,
+                                                name = @Name,
+                                                sex = @Sex,
+                                                isSword = @IsSword,
+                                                isBoots = @IsBoots,
+                                                isFlashlight = @IsFlashlight, 
+                                                isArmor = @IsArmor,
+                                                isAmulet = @IsAmulet,
+                                                isAura = @IsAura
+                                            WHERE UserId = @UserId",
+                    new
+                    {
+                        user.UserId,
+                        user.ImageId,
+                        user.Name,
+                        user.Sex,
+                        user.IsSword,
+                        user.IsBoots,
+                        user.IsFlashlight,
+                        user.IsArmor,
+                        user.IsAmulet,
+                        user.IsAura
+                    });
+                result = rowsAffected == 1;
+                return result;
+            }
+        }
     }
 }

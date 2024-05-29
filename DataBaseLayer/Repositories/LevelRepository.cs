@@ -41,7 +41,7 @@ namespace DataBaseLayer.Repositories
 
         public bool Update(Level level)
         {
-            Console.WriteLine("Level name" + level.Name + ", rate = " + level.Max_rate + ", id = " + level.LevelId);
+            //Console.WriteLine("Level name" + level.Name + ", rate = " + level.Max_rate + ", id = " + level.LevelId);
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();

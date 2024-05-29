@@ -6,7 +6,7 @@ internal class Program
     private static void Main(string[] args)
     {
         var rep1 = new LevelRepository();
-        var value1 = rep1.Retrieve("Level 1");
+        //var value1 = rep1.Retrieve("Level 1");
         /*foreach(var item in value1)
         {
             Console.WriteLine("Name "+value1.Name);
@@ -20,14 +20,26 @@ internal class Program
 
         var servis = new LevelServise();
         var stoneServis = new StoneServise();
+        var nameLevel = "Level 6";
 
-        Console.WriteLine(servis.IsLevelComplitedSuccessible(value1.Name, 8));
-        Console.WriteLine(stoneServis.SetStoneToLevel(value1.Name));
-        Console.WriteLine("StoneId " + value1.StoneId + "\n\n\n");
+        Console.WriteLine( servis.IsComplited(nameLevel));
+        //servis.IsLevelComplitedSuccessible(nameLevel, 8);
+        //stoneServis.SetStoneToLevel(nameLevel);
 
-        var value2 = rep1.Retrieve("Level 2");
-        /*foreach(var item in value1)
-        {*/
+
+
+
+        //Console.WriteLine(
+        //servis.IsLevelComplitedSuccessible(nameLevel, 8);
+        //);
+        //Console.WriteLine(
+        //stoneServis.SetStoneToLevel(nameLevel);
+        // );;
+        //Console.WriteLine("StoneId " + value1.StoneId + "\n\n\n");
+
+        /*var value2 = rep1.Retrieve("Level 2");
+        foreach(var item in value1)
+        {
         Console.WriteLine(value2.Name);
         Console.WriteLine(value2.LevelId);
         Console.WriteLine(value2.Grade);
@@ -35,7 +47,7 @@ internal class Program
         Console.WriteLine(value2.IsAvailable);
         Console.WriteLine(value2.IsBoss);
         Console.WriteLine(value2.IsCompleted);
-        Console.WriteLine(value2.StoneId);
+        Console.WriteLine(value2.StoneId);*/
         //}
 
 

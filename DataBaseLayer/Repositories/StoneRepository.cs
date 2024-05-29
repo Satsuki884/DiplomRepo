@@ -32,7 +32,7 @@ namespace DataBaseLayer.Repositories
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var stone = connection.Query<Stone>("SELECT * FROM Stone WHERE stoneValue = @stoneValue", new { stoneValue }).FirstOrDefault();
+                var stone = connection.Query<Stone>("SELECT * FROM Stone WHERE value = @stoneValue", new { stoneValue }).FirstOrDefault();
                 return stone;
             }
         }

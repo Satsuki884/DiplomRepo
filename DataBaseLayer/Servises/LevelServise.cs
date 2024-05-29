@@ -1,4 +1,5 @@
 ﻿using DataBaseLayer.Repositories;
+using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Servises
 {
@@ -39,6 +40,20 @@ namespace DataBaseLayer.Servises
             return false;
         }
 
+        public int SumGrade()
+        {
+            var levels = _levelRepository.Retrieve();
+            int sumGrades = levels.Where(x => x.Grade != 0).Sum(x => x.Grade);
+            return sumGrades;
+        }
+
+        public int SumMaxRate()
+        {
+            var levels = _levelRepository.Retrieve();
+            int sumMaxRate = levels.Where(x => x.Max_rate != 0).Sum(x => x.Max_rate);
+            return sumMaxRate;
+        }
+
         public bool IsComplited(string name)
         {
             var level = _levelRepository.Retrieve(name);
@@ -51,14 +66,22 @@ namespace DataBaseLayer.Servises
             return false;
         }
 
+        public bool BossIsCompleted(Level level)
+        {
+            var userServis = new UserServise();
+            level.IsAvailable = true;
+            var bossCompleted = _levelRepository.Update(level);
+            if (bossCompleted)
+            {
+                return userServis.UpdateImage(level);
+            }
+            return _levelRepository.Update(level);
+        }
+
         public bool IsAvailable(string currentLevelName)
         {
             var level = _levelRepository.Retrieve(currentLevelName);
             
-            if(!level.IsCompleted)
-            {
-                return false;
-            }
             var levels = _levelRepository.Retrieve();
 
             var currentLevelNumber = int.Parse(currentLevelName.Split(' ')[1]);
@@ -77,10 +100,12 @@ namespace DataBaseLayer.Servises
             }
             else
             {
-                if (Rules.bossLevelAcssesRule.TryGetValue(currentLevelNumber, out int pointsNeed) && sumGrades == pointsNeed)
+                Console.WriteLine("Level is boss: " + level.IsBoss);
+                if (Rules.bossLevelAcssesRule.TryGetValue(currentLevelNumber, out int pointsNeed) && sumGrades >= pointsNeed)
                 {
-                    nextLevel.IsAvailable = true;
-                    return _levelRepository.Update(nextLevel);
+                    return BossIsCompleted(nextLevel);
+                    /*nextLevel.IsAvailable = true;
+                    return _levelRepository.Update(nextLevel);*/
                 }
                 return false;
             }

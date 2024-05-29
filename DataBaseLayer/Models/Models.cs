@@ -82,7 +82,7 @@
             public bool IsArmor { get; set; }
             public bool IsAmulet { get; set; }
             public bool IsAura { get; set; }
-            public Image Image { get; set; }
+            //public Image Image { get; set; }
         }
 
         public class ExLevel
