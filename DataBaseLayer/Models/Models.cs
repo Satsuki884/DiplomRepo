@@ -31,26 +31,22 @@
         public class Exercise
         {
             public int ExerciseId { get; set; }
-            public int ImageId { get; set; }
             public string Text { get; set; }
             public int Point { get; set; }
             //public string Answer { get; set; }
             public int LevelId { get; set; }
-            public Image Image { get; set; }
         }
 
         public class Level
         {
 
             public int LevelId { get; set; }
-            public int ImageId { get; set; }
             public string Name { get; set; }
             public int Max_rate { get; set; }
             public int Grade { get; set; }
             public bool IsBoss { get; set; }
             public bool IsCompleted { get; set; }
             public bool IsAvailable { get; set; }
-            public Image Image { get; set; }
             public int StoneId { get; set; }
         }
 

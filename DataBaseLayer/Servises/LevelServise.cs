@@ -1,4 +1,6 @@
 ﻿using DataBaseLayer.Repositories;
+using System.Diagnostics;
+using System.Xml.Linq;
 using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Servises
@@ -11,10 +13,15 @@ namespace DataBaseLayer.Servises
             _levelRepository = new LevelRepository();
         }
 
-       /* bool isLevelAvailable(int level)
+        public bool IsLevelAvailable(string levelName)
         {
-
-        }*/
+            var level = _levelRepository.Retrieve(levelName);
+            if (level.IsAvailable)
+            {
+                return true;
+            }
+            return false;
+        }
         
         public bool IsLevelComplitedSuccessible(string name, int grade)
         {
@@ -26,15 +33,62 @@ namespace DataBaseLayer.Servises
             return false;
         }
 
+        public bool MakeLevelAccessible(Level nextLevel)
+        {
+            var levels = _levelRepository.Retrieve();
+            int lastAccsesLevel = levels
+                                        .Where(level => level.IsCompleted)
+                                        .Select(level => int.Parse(level.Name.Split(' ')[1]))
+                                        .DefaultIfEmpty(0)
+                                        .Max();
+            var levelNumber = lastAccsesLevel + 1;
+            var updateLevel = _levelRepository.Retrieve("Level " + levelNumber);
+
+            if (Rules.bossLevelAcssesRule.TryGetValue(lastAccsesLevel, out int pointsNeed) && SumGrade() >= pointsNeed)
+            {
+                updateLevel.IsAvailable = true;
+                if(_levelRepository.Update(nextLevel) && _levelRepository.Update(updateLevel))
+                {
+                    return true;
+                }
+                return false;
+            }
+            return _levelRepository.Update(nextLevel);
+        }
+
+        public bool SetStone(Level level)
+        {
+            var stoneServis = new StoneServise();
+            var levelComp = _levelRepository.Update(level);
+            if (levelComp)
+            {
+                return stoneServis.SetStoneToLevel(level.Name);
+            }
+            return false;
+        }
+
         public bool IsComplited(string name, int grade)
         {
             var level = _levelRepository.Retrieve(name);
             if (grade > 0 && level != null)
             {
                 level.IsCompleted = true;
-                level.Grade = grade;
+                //Console.WriteLine("level.Grade = " + level.Grade);
+                //Console.WriteLine("grade = " + grade);
 
-                return _levelRepository.Update(level);
+                if (grade >= level.Grade)
+                {
+                    //Console.WriteLine("level.Grade = " + level.Grade);
+                    level.Grade = grade;
+                    //Console.WriteLine("level.Grade = " + level.Grade);
+                }
+
+                // Console.WriteLine(level.Name + "isCompleted");
+
+                //var stoneServis = new StoneServise();
+                //stoneServis.SetStoneToLevel(name);
+
+                return SetStone(level);
             }
 
             return false;
@@ -54,17 +108,7 @@ namespace DataBaseLayer.Servises
             return sumMaxRate;
         }
 
-        public bool IsComplited(string name)
-        {
-            var level = _levelRepository.Retrieve(name);
-            if(level.Grade > 0)
-            { 
-                level.IsCompleted = true;
-                //_levelRepository.Update(level);
-                return true;
-            }
-            return false;
-        }
+        
 
         public bool BossIsCompleted(Level level)
         {
@@ -75,14 +119,12 @@ namespace DataBaseLayer.Servises
             {
                 return userServis.UpdateImage(level);
             }
-            return _levelRepository.Update(level);
+            return false;
         }
 
         public bool IsAvailable(string currentLevelName)
         {
             var level = _levelRepository.Retrieve(currentLevelName);
-            
-            var levels = _levelRepository.Retrieve();
 
             var currentLevelNumber = int.Parse(currentLevelName.Split(' ')[1]);
             
@@ -91,12 +133,13 @@ namespace DataBaseLayer.Servises
             
             var nextLevel = _levelRepository.Retrieve(nextLevelName);
 
-            int sumGrades = levels.Where(x=>x.Grade != 0).Sum(x=>x.Grade);
+            int sumGrades = SumGrade();
 
             if (!level.IsBoss)
             {
                 nextLevel.IsAvailable = true;
-                return _levelRepository.Update(nextLevel);
+                return MakeLevelAccessible(nextLevel);
+                //return _levelRepository.Update(nextLevel);
             }
             else
             {

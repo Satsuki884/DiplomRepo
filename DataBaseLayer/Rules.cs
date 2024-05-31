@@ -4,7 +4,7 @@
     {
         public static Dictionary<int, int> bossLevelAcssesRule = new Dictionary<int, int>()
         {
-            { 6, 15 },
+            { 6, 40 },
             { 18, 25 },
             { 31, 45 },
             { 34, 50 },

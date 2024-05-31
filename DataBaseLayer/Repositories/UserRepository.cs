@@ -12,7 +12,6 @@ namespace DataBaseLayer.Repositories
 {
     public class UserRepository
     {
-
         public List<User> Retrieve()
         {
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
@@ -45,7 +44,6 @@ namespace DataBaseLayer.Repositories
 
         public bool Update(User user)
         {
-            //Console.WriteLine("Level name" + level.Name + ", rate = " + level.Max_rate + ", id = " + level.LevelId);
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();

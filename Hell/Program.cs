@@ -1,11 +1,13 @@
 ﻿using DataBaseLayer.Repositories;
 using DataBaseLayer.Servises;
 
+//cntr shift b
+
 internal class Program
 {
     private static void Main(string[] args)
     {
-        var rep1 = new LevelRepository();
+        //var rep1 = new LevelRepository();
         //var value1 = rep1.Retrieve("Level 1");
         /*foreach(var item in value1)
         {
@@ -20,9 +22,14 @@ internal class Program
 
         var servis = new LevelServise();
         var stoneServis = new StoneServise();
-        var nameLevel = "Level 6";
+        var nameLevel = "Level 3";
 
-        Console.WriteLine( servis.IsComplited(nameLevel));
+        //Console.WriteLine( servis.IsLevelAvailable(nameLevel));
+        if (servis.IsLevelAvailable(nameLevel) )
+        {
+            Console.WriteLine(servis.IsLevelComplitedSuccessible(nameLevel, 8));
+            //Console.WriteLine(stoneServis.SetStoneToLevel(nameLevel));
+        }
         //servis.IsLevelComplitedSuccessible(nameLevel, 8);
         //stoneServis.SetStoneToLevel(nameLevel);
 

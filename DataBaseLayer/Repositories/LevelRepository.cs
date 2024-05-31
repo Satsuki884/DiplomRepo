@@ -30,7 +30,6 @@ namespace DataBaseLayer.Repositories
           
         public Level Retrieve(string name) 
         {
-            //Console.WriteLine("Level Retrieve(string name)" + name);
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
@@ -41,14 +40,12 @@ namespace DataBaseLayer.Repositories
 
         public bool Update(Level level)
         {
-            //Console.WriteLine("Level name" + level.Name + ", rate = " + level.Max_rate + ", id = " + level.LevelId);
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
                 bool result = false;
                 var rowsAffected = connection.Execute(@"UPDATE level
                                                     SET LevelId = @LevelId,
-                                                imageId = @imageId,
                                                 name = @name,
                                                 max_rate = @max_rate,
                                                 grade = @grade,
@@ -60,7 +57,6 @@ namespace DataBaseLayer.Repositories
                     new
                     {
                         level.LevelId,
-                        level.ImageId,
                         level.Name,
                         level.Max_rate,
                         level.Grade,
