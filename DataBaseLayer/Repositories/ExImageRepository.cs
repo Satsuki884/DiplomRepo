@@ -10,7 +10,7 @@ using static DataBaseLayer.Models.Models;
 
 namespace DataBaseLayer.Repositories
 {
-    internal class ExImageRepository
+    public class ExImageRepository
     {
 
         public List<ExImage> RetrieveByImageId(int ExerciseId)
@@ -23,5 +23,7 @@ namespace DataBaseLayer.Repositories
 
             }
         }
+
+
     }
 }

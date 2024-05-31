@@ -43,6 +43,16 @@ namespace DataBaseLayer.Repositories
             }
         }
 
+        public List<Answer> RetrieveByAnswerIds(int[] AnswerId)
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var answer = connection.Query<Answer>("SELECT * FROM Answer WHERE AnswerId IN @AnswerId", new { AnswerId }).ToList();
+                return answer;
+            }
+        }
+
 
     }
 }

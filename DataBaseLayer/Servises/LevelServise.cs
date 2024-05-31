@@ -73,22 +73,13 @@ namespace DataBaseLayer.Servises
             if (grade > 0 && level != null)
             {
                 level.IsCompleted = true;
-                //Console.WriteLine("level.Grade = " + level.Grade);
-                //Console.WriteLine("grade = " + grade);
 
                 if (grade >= level.Grade)
                 {
-                    //Console.WriteLine("level.Grade = " + level.Grade);
                     level.Grade = grade;
-                    //Console.WriteLine("level.Grade = " + level.Grade);
+                    return SetStone(level);
                 }
-
-                // Console.WriteLine(level.Name + "isCompleted");
-
-                //var stoneServis = new StoneServise();
-                //stoneServis.SetStoneToLevel(name);
-
-                return SetStone(level);
+                return _levelRepository.Update(level);
             }
 
             return false;
@@ -139,7 +130,6 @@ namespace DataBaseLayer.Servises
             {
                 nextLevel.IsAvailable = true;
                 return MakeLevelAccessible(nextLevel);
-                //return _levelRepository.Update(nextLevel);
             }
             else
             {
@@ -147,8 +137,6 @@ namespace DataBaseLayer.Servises
                 if (Rules.bossLevelAcssesRule.TryGetValue(currentLevelNumber, out int pointsNeed) && sumGrades >= pointsNeed)
                 {
                     return BossIsCompleted(nextLevel);
-                    /*nextLevel.IsAvailable = true;
-                    return _levelRepository.Update(nextLevel);*/
                 }
                 return false;
             }

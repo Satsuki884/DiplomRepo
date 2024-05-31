@@ -27,12 +27,12 @@ namespace DataBaseLayer.Repositories
             }
         }
 
-        public List<Exercise> RetrieveByLevelId(int LevelId)
+        public List<Exercise> RetrieveByLevelId(string LevelName)
         {
             using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
             {
                 connection.Open();
-                var stones = connection.Query<Exercise>("SELECT * FROM exercise WHERE LevelId = @LevelId", new { LevelId }).AsList();
+                var stones = connection.Query<Exercise>("SELECT * FROM exercise WHERE LevelName = @LevelName", new { LevelName }).AsList();
                 return stones;
             }
         }

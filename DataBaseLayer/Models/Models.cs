@@ -11,7 +11,7 @@
         public class Answer
         {
             public int AnswerId { get; set; }
-            public string value { get; set; }
+            public string Value { get; set; }
         }
 
         public class ExImage
@@ -88,6 +88,13 @@
             public int ExerciseId { get; set; }
             public Level Level { get; set; }
             public Exercise Exercise { get; set; }
+        }
+
+        public class ExerciseWithAnswers
+        {
+            public string Text { get; set; }
+            public int Point { get; set; }
+            public string[] Answers { get; set; }
         }
 
     }
