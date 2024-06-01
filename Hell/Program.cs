@@ -34,6 +34,11 @@ internal class Program
             Console.WriteLine($"Text: {exercise.Text}");
             Console.WriteLine($"Point: {exercise.Point}");
             Console.WriteLine($"Answers: {string.Join(", ", exercise.Answers)}\n");
+            Console.WriteLine("Images: ");
+            foreach (var image in exercise.Images)
+            {
+                Console.WriteLine($"\tPath: {image.ImagePath}, Description: {image.Description}");
+            }
         }
 
 

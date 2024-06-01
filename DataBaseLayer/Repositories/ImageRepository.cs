@@ -28,5 +28,15 @@ namespace DataBaseLayer.Repositories
                 return image;
             }
         }
+
+        public List<Image> RetrieveByAnswerIds(int[] imageId)
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var answer = connection.Query<Image>("SELECT * FROM image WHERE imageId IN @imageId", new { imageId }).ToList();
+                return answer;
+            }
+        }
     }
 }

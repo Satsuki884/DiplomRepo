@@ -24,6 +24,15 @@ namespace DataBaseLayer.Repositories
             }
         }
 
+        public List<ExImage> RetrieveByExerciseіId(int[] exercisesId)
+        {
+            using (var connection = new MySqlConnection(DataBaseManager.ConnectionString))
+            {
+                connection.Open();
+                var exImages = connection.Query<ExImage>("SELECT * FROM exanswer WHERE ExerciseId IN @exercisesId", new { exercisesId }).AsList();
+                return exImages;
 
+            }
+        }
     }
 }

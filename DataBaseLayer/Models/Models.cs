@@ -6,6 +6,7 @@
         {
             public int ImageId { get; set; }
             public string ImagePath { get; set; }
+            public string Description { get; set; }
         }
 
         public class Answer
@@ -95,6 +96,7 @@
             public string Text { get; set; }
             public int Point { get; set; }
             public string[] Answers { get; set; }
+            public Image[] Images { get; set; }
         }
 
     }
